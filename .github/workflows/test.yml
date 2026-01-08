@@ -1,0 +1,26 @@
+# A workflow for testing Hello world
+
+name: Test Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, world!"
+      - run: echo "The time is $(date)"
+      - run: echo "The time is $(date)" 
+
+#create another job to schdule every 10 mins
+  test-schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, world!"
+      - run: echo "The time is $(date)"
+      - run: echo "The time is $(date)"   
+      
