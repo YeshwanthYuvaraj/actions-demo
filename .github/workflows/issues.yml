@@ -1,0 +1,24 @@
+#Generate a code with github actions to automatically run when an issue is created in the repo. Use Json forn for the content.
+name: Issue Created Workflow
+on:
+  issues:
+    types: [opened]
+jobs:
+  issue_created:  
+    runs-on: ubuntu-latest
+    steps:
+      - name: Issue Created Notification
+        run: echo "A new issue has been created: ${{ github.event.issue.title }}"
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+      - name: Log Issue Details in JSON
+        run: |
+          echo '{
+            "title": "${{ env.ISSUE_TITLE }}",
+            "body": "${{ env.ISSUE_BODY }}",
+            "url": "${{ env.ISSUE_URL }}"
+          }' > issue_details.json
+          cat issue_details.json
+          
